@@ -1,0 +1,95 @@
+# Building a system with Ubuntu 18.04 LTS
+The steps listed in this document are intended to be completed after a fresh install of Ubuntu 18.04 LTS.
+
+## Step 1 - Setting up basic tools
+### Setup SSH
+```
+sudo apt install ssh
+sudo ufw allow ssh
+```
+or if specifying a different port than 22. Change to required port.
+```
+sudo ufw allow 22/tcp
+```
+
+## Step 2 - Setting up drivers
+To prevent conflicts with drivers we need to blacklist the default drivers and install the NVIDIA drivers.
+
+### Check if nouveau is blacklisted
+```
+cat /etc/modprobe.d/blacklist-nvidia-nouveau.conf
+```
+
+If nouveau is properly blacklisted the output should appear as follows:
+```
+blacklist nouveau
+options nouveau modeset=0
+```
+
+### Check if nouveau drivers are loaded
+```
+lsmod | grep nouveau
+```
+
+### Check if NVIDIA drivers are loaded
+```
+lsmod | grep -i nvidia
+```
+
+### NVIDIA driver installation
+More information can be found in NVIDA documentation: https://docs.nvidia.com/datacenter/tesla/tesla-installation-notes/index.html
+
+Verify your system has NVIDIA CUDA-Capable GPU(s)
+```
+lspci | grep -i nvidia
+```
+
+Verify the system has gcc installed
+```
+gcc --version
+```
+It is highly likely the system does not. Install the build-essential package which includes gcc, g++, make, and the manual pages.
+
+```
+sudo apt install build-essential
+sudo apt-get install manpages-dev
+```
+
+Verify the version of gcc
+```
+gcc --version
+```
+
+Verify the syste has the correct Kernel Headers and Development packages installed.
+```
+uname -r
+```
+The kernel headers and development packages for the currently running kernel can be installed with: 
+```
+sudo apt-get install linux-headers-$(uname -r)
+```
+
+Clean up
+```
+sudo apt autoremove
+```
+
+Install the cuda toolkit
+https://developer.nvidia.com/cuda-downloads
+https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=18.04&target_type=deb_network
+```
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+sudo apt-get update
+sudo apt-get -y install cuda
+```
+Post install
+```
+export PATH=/usr/local/cuda-11.5/bin${PATH:+:${PATH}}
+```
+
+``` 
+cat /proc/driver/nvidia/version
+```
