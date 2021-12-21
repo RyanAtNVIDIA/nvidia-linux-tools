@@ -11,6 +11,10 @@ or if specifying a different port than 22. Change to required port.
 ```
 sudo ufw allow 22/tcp
 ```
+### Setup curl
+```
+sudo apt install curl
+```
 
 ## Step 2 - Setting up drivers
 To prevent conflicts with drivers we need to blacklist the default drivers and install the NVIDIA drivers.
@@ -92,4 +96,39 @@ export PATH=/usr/local/cuda-11.5/bin${PATH:+:${PATH}}
 
 ``` 
 cat /proc/driver/nvidia/version
+```
+## Step 3 Configure for Containers
+Setup Docker
+```
+curl https://get.docker.com | sh \
+  && sudo systemctl start docker \
+  && sudo systemctl enable docker
+```
+
+Install NVIDIA's container toolkit
+```
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+   && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+   && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update
+
+sudo apt-get install -y nvidia-docker2
+
+sudo systemctl restart docker
+```
+
+Validate that you can run an NVIDIA docker container
+```
+sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+```
+
+Add user to docker group
+```
+sudo usermod -a -G docker $USER
+```
+
+Setup NGC key
+```
+docker login nvcr.io
 ```
