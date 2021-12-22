@@ -17,7 +17,15 @@ sudo apt install curl
 ```
 
 ## Step 2 - Setting up drivers
-To prevent conflicts with drivers we need to blacklist the default drivers and install the NVIDIA drivers.
+After installing the standard version of Ubuntu the OS defaults to using nouveau drivers for the GPU(s). We need to configure the system to use NVIDIA's drivers but first we will blacklist the nouveau drivers to prevent conflicts.
+
+### NVIDIA driver installation
+More information can be found in NVIDA documentation: https://docs.nvidia.com/datacenter/tesla/tesla-installation-notes/index.html
+
+Verify your system has NVIDIA CUDA-Capable GPU(s)
+```
+lspci | grep -i nvidia
+```
 
 ### Check if nouveau is blacklisted
 ```
@@ -48,11 +56,7 @@ Verify your system has NVIDIA CUDA-Capable GPU(s)
 lspci | grep -i nvidia
 ```
 
-Verify the system has gcc installed
-```
-gcc --version
-```
-It is highly likely the system does not. Install the build-essential package which includes gcc, g++, make, and the manual pages.
+It is highly likely the system does not have gcc and other build tools installed. Install the build-essential package which includes gcc, g++, make, and the manual pages.
 
 ```
 sudo apt install build-essential
