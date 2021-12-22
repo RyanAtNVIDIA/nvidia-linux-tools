@@ -20,3 +20,10 @@ sudo apt install virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
+
+
+found issue installing pyindex. Pip needed to be upgraded.
+```
+python3 -m pip install --upgrade pip
+```
+
