@@ -26,4 +26,9 @@ found issue installing pyindex. Pip needed to be upgraded.
 ```
 python3 -m pip install --upgrade pip
 ```
+Installing collected packages: urllib3, six, idna, certifi, websocket-client, requests, tabulate, docker-pycreds, docker, nvidia-tao
+  WARNING: The script tabulate is installed in '/home/ryan/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script tao is installed in '/home/ryan/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
 
