@@ -67,6 +67,12 @@ Verify your system has NVIDIA CUDA-Capable GPU(s)
 ```
 lspci | grep -i nvidia
 ```
+If the output does not show the model of the gpu but rather "Device" followed by hex chars your can update the PCI ids with the following:
+```
+sudo update-pciids
+```
+
+
 
 It is highly likely the system does not have gcc and other build tools installed. Install the build-essential package which includes gcc, g++, make, and the manual pages.
 
