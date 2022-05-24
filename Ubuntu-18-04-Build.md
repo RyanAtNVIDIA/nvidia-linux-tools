@@ -106,14 +106,14 @@ https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&D
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
 sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 sudo apt-get update
 sudo apt-get -y install cuda
 ```
 Post install
 ```
-export PATH=/usr/local/cuda-11.5/bin${PATH:+:${PATH}}
+export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
 ```
 
 ``` 
@@ -142,7 +142,7 @@ sudo systemctl restart docker
 
 Validate that you can run an NVIDIA docker container
 ```
-sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+sudo docker run --rm --gpus all nvidia/cuda:11.7-base nvidia-smi
 ```
 
 Add user to docker group
