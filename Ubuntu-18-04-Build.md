@@ -142,7 +142,7 @@ sudo systemctl restart docker
 
 Validate that you can run an NVIDIA docker container
 ```
-sudo docker run --rm --gpus all nvidia/cuda:11.7-base nvidia-smi
+sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 ```
 
 Add user to docker group
