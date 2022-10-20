@@ -116,7 +116,7 @@ sudo apt-get -y install cuda
 ```
 Post install
 ```
-export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
+export PATH=/usr/local/cuda-11.8/bin${PATH:+:${PATH}}
 ```
 
 ``` 
