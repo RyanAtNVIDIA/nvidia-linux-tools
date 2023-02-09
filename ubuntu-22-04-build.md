@@ -153,6 +153,8 @@ Add user to docker group
 sudo usermod -a -G docker $USER
 ```
 
+Retart the computer for the change to take effect
+
 Setup NGC key
 ```
 docker login nvcr.io
